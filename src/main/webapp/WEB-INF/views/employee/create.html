@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create customer</title>
+    <style>
+        input.gg {
+            font-size: 22px;
+            display: block;
+            margin-bottom:20px;
+            height: 32px;
+            padding: 5px 10px;
+            background: none;
+            background-image: none;
+            border: 1px solid #a0b3b0;
+            color: #ffffff;
+            border-radius: 0;
+            transition: border-color .25s ease, box-shadow .25s ease;
+            margin-right: 5px;
+            margin-left: 5px;
+            width: 267px;
+            margin-top: 10px;
+        }
+
+        form {
+            padding: 40px;
+            max-width: 600px;
+            margin: 40px auto;
+            background: rgba(19, 35, 47, 0.9);
+            box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+        }
+
+        body {
+            background: url(http://bit.ly/2gPLxZ4);
+            font-family: 'Titillium Web', sans-serif;
+            background-size: 100%;
+        }
+
+        h1.title {
+            text-align: center;
+            color: #ffffff;
+            font-weight: 300;
+            margin: 0 0 32px;
+        }
+
+        input:hover {
+            border: 1px solid #1f7ccb;
+        }
+
+
+
+        input[type="submit"] {
+            width: 591px!important;
+            border: 0;
+            outline: none;
+            border-radius: 0;
+            padding: 15px 0;
+            font-size: 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            background: #1ab188;
+            color: #ffffff;
+            transition: all 0.5s ease;
+            -webkit-appearance: none;
+            height: 66px!important;
+            margin-top: 16px;
+            text-align: center;
+
+        }
+        .gg123 {
+            margin-left: 2px;
+        }
+        .max123{
+            margin-left: 2px;
+        }
+        input[type="submit"]:hover {
+            background: #299276;
+        }
+        .f12{
+            color: red;
+            font-size: 17px;
+            text-align: left;
+            margin-left: 6px;
+        }
+        input#avatar {
+            width: 571px;
+            margin-top: 17px;
+        }
+        span{
+            color: white;
+            margin-left: 5px;
+        }
+        a{
+            color: red;
+            margin-left: 9px;
+        }
+        select#department {
+            margin-left: 5px;
+            padding: 8px;
+            font-size: 24px;
+            width: 97%;
+            margin-top: 8px;
+        }
+        .g12{
+            color: white;
+            font-size: 22px;
+        }
+        span.gg {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+
+
+
+<form th:action="@{/create-employee}" th:object="${employee}" method="post">
+    <h1 class="title">Edit User</h1>
+    <div class="maxDiv">
+
+
+        <table>
+            <tr>
+                <td><span>Ma Nhan Vien</span><input class="gg" placeholder="Ma nhan vien*" type="text" th:field="*{employeeId}"/>
+                    <span class="gg" th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}">EmployeeId Error</span>
+                </td>
+
+                <td><span>Phone</span><input class="gg" placeholder="phone*" type="text" th:field="*{numberPhone}"/>
+                    <span class="gg" th:if="${#fields.hasErrors('numberPhone')}" th:errors="*{numberPhone}">NumberPhone Error</span>
+                </td>
+
+            </tr>
+            <tr>
+
+                <td><span>Name</span><input class="gg" placeholder="Name*" type="text" th:field="*{name}"/>
+                    <span class="gg" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+                </td>
+
+                <td><span>BirthDate</span><input class="gg"  placeholder="dd/mm/yyyy"type="date" th:field="*{dateOfBirth}"/>
+                    <span class="gg" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">DateOfBirth Error</span></td>
+
+            </tr>
+
+            <tr>
+                <td><span>Address</span><input class="gg" placeholder="Address*" type="text" th:field="*{address}"/>
+                    <span class="gg" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</span></td>
+
+                <td><span>CMND</span><input class="gg" placeholder="CMND*" type="text" th:field="*{personId}"/>
+                    <span class="gg" th:if="${#fields.hasErrors('personId')}" th:errors="*{personId}">PersonId Error</span></td>
+
+            </tr>
+
+            <tr>
+                <td><span>Email</span><input class="gg" placeholder="Email*" type="text" th:field="*{email}"/>
+                    <span class="gg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Emial Error</span></td>
+
+                <td>
+
+                    <select th:field="*{department}">
+                        <option th:each="p : ${departments}" th:value="${p.id}" th:text="${p.name}"></option>
+                    </select>
+                </td>
+
+            </tr>
+
+
+        </table>
+        <div class="max123">
+            <div class="g12"><input type="radio" name="gender" th:field="*{gender}" value="Nam">Nam
+                <input type="radio" name="gender" th:field="*{gender}" value="Nữ">Nữ</div>
+        </div>
+        <span class="gg" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Gender Error</span>
+
+        <div class="max123">
+            <div><input class="f12" type="submit" value="Create User"></div>
+        </div>
+        <th:block th:if="${message}">
+            <p class="f12" th:text="${message}"></p>
+            <a  th:href="@{/employees}">Go to EmployeeList</a>
+        </th:block>
+
+    </div>
+</form>
+</body>
+</html>
